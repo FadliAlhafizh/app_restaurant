@@ -13,24 +13,35 @@ class ListRestaurant extends StatefulWidget {
 class _ListRestaurantState extends State<ListRestaurant> {
   Widget _buildList(BuildContext context) {
     return FutureBuilder<String>(
-        future: DefaultAssetBundle.of(context)
-            .loadString('assets/local_restaurant.json'),
-        builder: (context, snapshot) {
-          final List<Restaurant> restaurant = parseRestaurant(snapshot.data);
-          return ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return _buildItem(context, restaurant[index]);
-            },
-          );
-        });
+      future: DefaultAssetBundle.of(context)
+          .loadString('assets/local_restaurant.json'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          if (snapshot.hasData) {
+            final List<Restaurants> restau = parseRestaurant(snapshot.data!);
+            return ListView.separated(
+                itemCount: restau.length,
+                itemBuilder: (context, index) {
+                  return _buildItem(context, restau[index]);
+                },
+                separatorBuilder: (context, index) => const Divider());
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }
+      },
+    );
   }
 
-  Widget _buildItem(BuildContext context, Restaurant restaurant) {
+  Widget _buildItem(BuildContext context, Restaurants restau) {
     return Material(
       child: ListTile(
-        title: Text(restaurant.name),
-        subtitle: Text(restaurant.description),
+        title: Text(restau.name),
+        subtitle: Text(restau.description),
       ),
     );
   }
