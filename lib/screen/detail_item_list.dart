@@ -84,11 +84,25 @@ class _DetailListItemState extends State<DetailListItem> {
           const SizedBox(height: 8),
           Row(
             children: [
+              const Text('Location:'),
               Icon(
                 Icons.location_on,
                 color: Colors.red[400],
               ),
-              Text("Alamat: ${widget.restaurants.city}")
+              Text(widget.restaurants.city)
+            ],
+          ),
+          Row(
+            children: [
+              const Text('Rating: '),
+              const Icon(
+                Icons.star_rate_rounded,
+                color: Colors.yellow,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                widget.restaurants.rating.toString(),
+              ),
             ],
           ),
         ],
@@ -151,10 +165,13 @@ class _DetailListItemState extends State<DetailListItem> {
                       elevation: 2,
                       child: Column(
                         children: [
-                          Container(
-                              color: Colors.blueAccent,
-                              height:
-                                  (MediaQuery.of(context).size.height * 0.09)),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            height: MediaQuery.of(context).size.height * 0.10,
+                            child: Image.network(
+                                fit: BoxFit.cover,
+                                'https://i.pinimg.com/564x/5b/ce/90/5bce9017cc10547022b479d9ea1808c8.jpg'),
+                          ),
                           Container(
                             alignment: Alignment.bottomCenter,
                             child: Text(foods.name,
@@ -191,10 +208,13 @@ class _DetailListItemState extends State<DetailListItem> {
                       elevation: 2,
                       child: Column(
                         children: [
-                          Container(
-                              color: Colors.blueAccent,
-                              height:
-                                  (MediaQuery.of(context).size.height * 0.09)),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            height: MediaQuery.of(context).size.height * 0.09,
+                            child: Image.network(
+                                fit: BoxFit.cover,
+                                'https://i.pinimg.com/564x/c3/20/aa/c320aa6d2d3f0f66ebb02c449576a41e.jpg'),
+                          ),
                           Container(
                             alignment: Alignment.bottomCenter,
                             child: Text(drinks.name,

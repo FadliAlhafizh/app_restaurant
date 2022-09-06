@@ -14,19 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _bottomNavIndex = 0;
-
-  void _onBottomNavTapped(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
-  }
-
   final List<BottomNavigationBarItem> _bottomNavBarItems = [];
 
   Widget _buildForAndroid(BuildContext context) {
-    return Scaffold(
-      body: _listWidget[_bottomNavIndex],
+    return const Scaffold(
+      body: ListRestaurant(),
     );
   }
 
@@ -37,14 +29,10 @@ class _HomePageState extends State<HomePage> {
         activeColor: thirdColor,
       ),
       tabBuilder: (context, index) {
-        return _listWidget[index];
+        return const ListRestaurant();
       },
     );
   }
-
-  final List<Widget> _listWidget = const [
-    ListRestaurant(),
-  ];
 
   @override
   Widget build(BuildContext context) {
